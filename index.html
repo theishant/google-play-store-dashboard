@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Google Play Store Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .plot-container {
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    .plot-container h2 {
+      margin-top: 0;
+      color: #333;
+    }
+    .insight {
+      margin: 10px 0 20px;
+      font-style: italic;
+      color: #555;
+    }
+    .plot-container button {
+      padding: 10px 20px;
+      background: #007acc;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .plot-container button:hover {
+      background: #005fa3;
+    }
+  </style>
+  <script>
+    function openPlot(filename) {
+      window.open(filename, '_blank');
+    }
+
+    // 🕒 IST time filter logic
+    const now = new Date();
+    const utcOffset = now.getTimezoneOffset();
+    const istOffset = 330; // +5:30 in minutes
+    const istTime = new Date(now.getTime() + (istOffset + utcOffset) * 60000);
+    const istHour = istTime.getHours();
+
+    window.onload = function() {
+      if (!(istHour >= 13 && istHour < 14)) {
+        document.getElementById("task2").style.display = "none";
+      }
+      if (!(istHour >= 15 && istHour < 17)) {
+        document.getElementById("task3").style.display = "none";
+      }
+      if (!(istHour >= 18 && istHour < 20)) {
+        document.getElementById("task4").style.display = "none";
+      }
+      if (!(istHour >= 17 && istHour < 19)) {
+        document.getElementById("task5").style.display = "none";
+      }
+      if (!(istHour >= 18 && istHour < 21)) {
+        document.getElementById("task6").style.display = "none";
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <h1>📊 Google Play Store Analytics Dashboard</h1>
+
+  <!-- Task 1 -->
+  <div class="plot-container" id="task1">
+    <h2>Task 1: Sentiment Distribution</h2>
+    <div class="insight">
+      Visualizes user sentiment (positive, neutral, negative) by rating groups for apps with over 1,000 reviews in the top 5 categories.
+    </div>
+    <button onclick="openPlot('fig1_stacked_sentiment.html')">View Chart</button>
+  </div>
+
+  <!-- Task 2 -->
+  <div class="plot-container" id="task2">
+    <h2>Task 2: Average Installs vs Revenue</h2>
+    <div class="insight">
+      Dual-axis chart comparing installs and revenue for Free vs Paid apps within top 3 categories. Applies strict filters.
+    </div>
+    <button onclick="openPlot('fig2_dual_axis_installs_revenue.html')">View Chart</button>
+  </div>
+
+  <!-- Task 3 -->
+  <div class="plot-container" id="task3">
+    <h2>Task 3: Ratings & Reviews Comparison</h2>
+    <div class="insight">
+      Grouped bar chart comparing average rating and total reviews for top 10 categories by installs. Applies strict filters.
+    </div>
+    <button onclick="openPlot('fig3_grouped_bar_chart.html')">View Chart</button>
+  </div>
+
+  <!-- Task 4 -->
+  <div class="plot-container" id="task4">
+    <h2>Task 4: Global Installs Choropleth</h2>
+    <div class="insight">
+      Interactive world map showing installs by category for top 5 categories only, highlighting installs above 1 million.
+    </div>
+    <button onclick="openPlot('fig4_choropleth_map.html')">View Chart</button>
+  </div>
+
+  <!-- Task 5 -->
+  <div class="plot-container" id="task5">
+    <h2>Task 5: Size vs Rating Bubble Chart</h2>
+    <div class="insight">
+      Bubble chart showing app size vs average rating, bubble size = installs, category translations included.
+    </div>
+    <button onclick="openPlot('fig5_bubble_chart.html')">View Chart</button>
+  </div>
+
+  <!-- Task 6 -->
+  <div class="plot-container" id="task6">
+    <h2>Task 6: Time Series of Installs</h2>
+    <div class="insight">
+      Time series chart for installs trend over time, highlighting growth spikes and category translations.
+    </div>
+    <button onclick="openPlot('fig6_time_series.html')">View Chart</button>
+  </div>
+
+</body>
+</html>
